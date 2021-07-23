@@ -1,25 +1,29 @@
 <div>
-  <h4> List of Borrowed Books include: </h4>
-  <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Name</th>
-          <th scope="col">Description</th>
-          <th scope="col">Borrower</th>
-          <th scope="col">Return Date</th>
-        </tr>
-      </thead>
+  <% if @borrowed_books.empty? %>
+    <h4>No books have been borrowed yet </h4>
+  <% else %>
+    <h4> List of Borrowed Books include: </h4>
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Borrower</th>
+            <th scope="col">Return Date</th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <% @borrowed_books.each do |borrowed_book|%>
-          <tr class=<%= check_overdue(borrowed_book.return_date) %>>
-            <td><%= borrowed_book.book.name %></td>
-            <td><%= borrowed_book.book.description %></td>
-            <td><%= link_to borrowed_book.borrower.full_name, borrowed_book.borrower, class: 'link p-2' %></td>
-            <td><%= borrowed_book.return_date %></td>
-          </tr>   
-        <% end %>
-      </tbody>
-    </table>
+        <tbody>
+          <% @borrowed_books.each do |borrowed_book|%>
+            <tr class=<%= check_overdue(borrowed_book.return_date) %>>
+              <td><%= borrowed_book.book.name %></td>
+              <td><%= borrowed_book.book.description %></td>
+              <td><%= link_to borrowed_book.borrower.full_name, borrowed_book.borrower, class: 'link p-2' %></td>
+              <td><%= borrowed_book.return_date %></td>
+            </tr>   
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>  
   <%= link_to 'Home', root_path, class: 'p-2' %>
 </div>
