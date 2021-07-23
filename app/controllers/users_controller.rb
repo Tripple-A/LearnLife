@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[ show edit update destroy assign ]
 
   # GET /users or /users.json
   def index
     @users = User.all
   end
+
+  #{add_index :bookmarks, [:pin_id, :user_id], unique: true}
 
   # GET /users/1 or /users/1.json
   def show
@@ -20,7 +22,23 @@ class UsersController < ApplicationController
   end
 
   def assign
-    redirect_to user_path(params[:user_id])
+    @book = Book.find(params[:book_id])
+    attributes = {
+      borrower_id: params[:user_id],
+      book_id: @book.id,
+      return_date: params[:return_date]
+    }
+    @assigned_book = AssignedBook.new(attributes)
+
+    respond_to do |format|
+      if @assigned_book.save && @book.update_attributes(:available, false)
+        format.html { redirect_to @user, notice: "#{@book.name} was successfully borrowed." }
+        format.json { render :show, status: :created, location: @user }
+      else
+        format.html { redirect_to @user, notice: "#{@assigned_book.name} was not successfully borrowed." }
+        format.json { render json: @assigned_book.errors, status: :unprocessable_entity }
+      end
+    end
   end
   # POST /users or /users.json
   def create
@@ -62,11 +80,16 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = params[:id] ? User.find(params[:id]) : User.find(params[:user_id])
     end
 
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:first_name, :last_name)
     end
+
+    # def assign_params
+    #   params.require(:user).permit(:user_id, :book_id, :return_date)
+    #   params[:user][:borrower_id] = params[:user_id]
+    # end
 end
