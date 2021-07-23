@@ -1,14 +1,26 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>First name:</strong>
-  <%= @user.first_name %>
-</p>
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <h1>
+    <strong><%= @user.last_name.capitalize %> <%= @user.first_name.capitalize %></strong>
+  </h1>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @user.last_name %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Back', users_path %>
+<div class="row mt-4">
+  <div class="col-md-4">
+    <h3>Assign a book to  <%= @user.first_name %></h3>
+    <%= form_with url: user_assign_book_path(@user), method: :post do |f| %>
+      <%= f.label :book_id, "Book Title:" %>
+      <%= select_tag "book_id", options_for_select(Book.all.map{|mg|[mg.name, mg.id] }), class: 'form-control' %>
+      <%= f.label :book_id, "Return Date:" %>
+      <%= f.date_field :return_date, as: :date, value: f.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %> 
+      <br>
+      <%= f.submit "Assign", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+  <div class="col-md-8">
+    <h3>Books borrowed by foo</h3>
+  </div>
+  </div>
+</div>
