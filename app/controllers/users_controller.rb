@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @assigned_book = AssignedBook.new(attributes)
 
     respond_to do |format|
-      if @assigned_book.save && @book.update_attributes(:available, false)
+      if @assigned_book.save && @book.update_attribute(:available, false)
         format.html { redirect_to @user, notice: "#{@book.name} was successfully borrowed." }
         format.json { render :show, status: :created, location: @user }
       else
