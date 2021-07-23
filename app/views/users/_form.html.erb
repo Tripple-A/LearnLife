@@ -11,17 +11,17 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="col-md-4 form">
     <%= form.label :first_name %>
-    <%= form.text_field :first_name %>
-  </div>
+    <%= form.text_field :first_name, class:"form-control" %>
 
-  <div class="field">
     <%= form.label :last_name %>
-    <%= form.text_field :last_name %>
-  </div>
+    <%= form.text_field :last_name, class:"form-control" %>
+  
+  <br>
 
-  <div class="actions">
+  <div class="actions p-2">
     <%= form.submit %>
+  </div>
   </div>
 <% end %>
