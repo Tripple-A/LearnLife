@@ -1,29 +1,26 @@
 
-<div class="container">
-  <p id="notice"><%= notice %></p>
+<div class="container-fluid">
+  <p id="notice" class="p-4"><%= notice %></p>
+  <% flash.each do |type, msg| %>
+    <% if type == 'alert' %>
+      <div class="alert alert-danger">
+        <%= msg %>
+      </div> 
+    <% end %>
+  <% end %>
   <h1>
-    <strong><%= @user.last_name.capitalize %> <%= @user.first_name.capitalize %></strong>
+    <strong> <%= @user.full_name %> </strong>
   </h1>
   <%= link_to 'Home', root_path %> |
   <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Back', users_path %>
-<div class="row mt-4">
-  <div class="col-md-4">
-    <h3>Assign a book to  <%= @user.first_name %></h3>
-    <%= form_with url: user_assign_book_path(@user) ,method: :post do |f| %>
-      <%= f.label :book_id, "Book Title:" %>
-      <%= select_tag "book_id", options_from_collection_for_select(Book.available, :id, :name), :prompt => 'Select Book', class: 'form-control' %>
-      <%= f.label :return_date, "Return Date:" %>
-      <%= f.date_field :return_date, as: :date, value: f.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %> 
-      <br>
-      <%= f.submit "Assign", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-  <div class="col-md-8">
-    <h3>Books borrowed by <%= @user.first_name %></h3>
-    <% @user.borrowed_books.each do |book| %>
-      <h4><%= book.name %></h4>
-    <% end %>
-  </div>
+  <%= link_to 'All Users', users_path %>
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <%= render 'assign_book_form', user: @user, assigned_book: @assigned_book %> 
+    </div>
+    <div class="col-md-8">
+      <h3>Books borrowed by <%= @user.first_name.capitalize %></h3>
+      <%= render 'borrowed_books', borrwed_books: @borrowed_books %>
+    </div>
   </div>
 </div>

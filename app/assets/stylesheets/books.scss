@@ -3,9 +3,18 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .form {
-   margin-left: 33%
+  width: 40%
 }
 
 .link {
-    color: purple;
+  color: purple;
+  background-color: transparent
+}
+
+.link :hover {
+  background-color: transparent;
+}
+
+.red {
+  background-color: red;
 }

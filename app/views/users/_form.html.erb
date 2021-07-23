@@ -1,3 +1,4 @@
+ <div class="mx-auto form">
 <%= form_with(model: user) do |form| %>
   <% if user.errors.any? %>
     <div id="error_explanation">
@@ -11,7 +12,7 @@
     </div>
   <% end %>
 
-  <div class="col-md-4 form">
+ 
     <%= form.label :first_name %>
     <%= form.text_field :first_name, class:"form-control" %>
 
