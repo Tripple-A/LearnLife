@@ -12,8 +12,7 @@
           %th{:scope => "col"} Return Date
       %tbody
         - @borrowed_books.each do |borrowed_book|
-          %tr{:class => "<haml_loud"}
-            check_overdue(borrowed_book.return_date) &gt;
+          %tr{:class => check_overdue(borrowed_book.return_date)}
             %td= borrowed_book.book.name
             %td= borrowed_book.book.description
             %td= link_to borrowed_book.borrower.full_name, borrowed_book.borrower, class: 'link p-2'
