@@ -4,14 +4,10 @@ class AssignedBook < ApplicationRecord
   belongs_to :borrower, class_name: 'User'
   belongs_to :book
   validates_presence_of :return_date
-  before_save :confirm_availability
+  validate :book_must_be_available
 
-  def confirm_availability
-    book_id = self.book_id
-    available = Book.find(book_id).available
-    return if available
-
-    errors.add(:book_id, 'this book is unavailable')
-    throw :abort
+  def book_must_be_available
+    available = Book.find(book_id).available if book_id
+    errors.add(:book_id, 'is unavailable') unless available
   end
 end
