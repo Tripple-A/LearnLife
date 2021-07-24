@@ -17,6 +17,7 @@ RSpec.describe AssignedBook, type: :model do
     context 'does not assign a book when all conditions are not fulfilled' do
       let(:assigned_book2) { build(:assigned_book, book_id: book2.id, borrower_id: user.id) }
       let(:assigned_book3) { build(:assigned_book, book_id: nil, borrower_id: nil, return_date: nil) }
+
       it 'does not save the book if book is unavailable' do
         expect(assigned_book2).to_not be_valid
       end
