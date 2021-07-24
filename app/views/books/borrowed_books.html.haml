@@ -1,0 +1,21 @@
+%div
+  - if @borrowed_books.empty?
+    %h4 No books have been borrowed yet
+  - else
+    %h4 List of Borrowed Books include:
+    %table.table
+      %thead
+        %tr
+          %th{:scope => "col"} Name
+          %th{:scope => "col"} Description
+          %th{:scope => "col"} Borrower
+          %th{:scope => "col"} Return Date
+      %tbody
+        - @borrowed_books.each do |borrowed_book|
+          %tr{:class => "<haml_loud"}
+            check_overdue(borrowed_book.return_date) &gt;
+            %td= borrowed_book.book.name
+            %td= borrowed_book.book.description
+            %td= link_to borrowed_book.borrower.full_name, borrowed_book.borrower, class: 'link p-2'
+            %td= borrowed_book.return_date
+  = link_to 'Home', root_path, class: 'p-2'

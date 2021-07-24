@@ -1,0 +1,19 @@
+%p#notice= notice
+%h1 Users
+= link_to 'New User', new_user_path, class: "p-2 m-4"
+= link_to 'Home', root_path, class: "p-2 m-4"
+%br/
+%br/
+- if @users.empty?
+  %h3 There are no users yet
+- else
+  %table.table
+    %thead
+      %tr
+        %th{:scope => "col"} First name
+        %th{:scope => "col"} Last name
+        %th{:scope => "col"} View User
+        %th{:scope => "col"} Edit User
+        %th{:scope => "col"} Delete User
+    %tbody
+      = render @users

@@ -1,0 +1,17 @@
+.mx-auto.form
+  = form_with(model: user) do |form|
+    - if user.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(user.errors.count, "error")
+          prohibited this user from being saved:
+        %ul
+          - user.errors.each do |error|
+            %li= error.full_message
+    = form.label :first_name
+    = form.text_field :first_name, class:"form-control"
+    = form.label :last_name
+    = form.text_field :last_name, class:"form-control"
+    %br/
+    .actions.p-2
+      = form.submit

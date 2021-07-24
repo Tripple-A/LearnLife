@@ -1,0 +1,23 @@
+.container-fluid
+  %p#notice.p-4= notice
+  - flash.each do |type, msg|
+    - if type == 'alert'
+      .alert.alert-danger
+        = msg
+  %h1
+    %strong
+      = @user.full_name
+  = link_to 'Home', root_path
+  |
+  \#{link_to 'Edit', edit_user_path(@user)}
+  |
+  \#{link_to 'All Users', users_path}
+  .row.mt-4
+    .col-md-4
+      %h3
+        Borrow a book
+      = render 'assign_book_form', user: @user, assigned_book: @assigned_book
+    .col-md-8
+      %h3
+        Books borrowed by #{@user.first_name.capitalize}
+      = render 'borrowed_books', borrowed_books: @borrowed_books

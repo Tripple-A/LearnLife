@@ -1,0 +1,6 @@
+%tr
+  %td= user.first_name
+  %td= user.last_name
+  %td= link_to 'Show', user, class: "p-2 link"
+  %td= link_to 'Edit', edit_user_path(user), class: "p-2 link"
+  %td= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, class: "p-2 link"

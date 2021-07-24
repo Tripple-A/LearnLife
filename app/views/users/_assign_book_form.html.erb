@@ -1,8 +1,0 @@
-<%= form_with(model: assigned_book, url: user_assign_book_path(user), method: "post") do |f| %>
-  <%= f.label :book_id, "Book Title:" %>
-  <%= f.select(:book_id, options_from_collection_for_select(Book.available, :id, :name), {:prompt => 'Select Book'}, { :class => 'form-control' }) %>
-  <%= f.label :return_date, "Return Date:" %>
-  <%= f.date_field :return_date, as: :date, value: f.object.try(:strftime,"%m/%d/%Y"), class: 'form-control' %> 
-  <br>
-  <%= f.submit "Assign", class: "btn btn-primary" %> 
-<% end %>
