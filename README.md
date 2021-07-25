@@ -26,6 +26,7 @@ This is a library app that was built using RubyOnRails. It keeps track of borrow
 
 <!-- concepts employed -->
 ## Concepts Employed
+* Scaffolding
 * Associations
 * Indexing Tables
 * Validations
