@@ -1,5 +1,5 @@
 # README
-# Courses-Api
+
 This is a library app that was built using RubyOnRails. It keeps track of borrowed books and their borrowers. 
 ## Table of Contents
 
