@@ -84,6 +84,7 @@ your@pc:~$ rspec
 ## Future Improvements
 * Use Turbo Streams to update a page on model changes to enable SPA simulation.
 * Add feature specs using Capybara, to mimic actions of real users interacting with the app.
+* Disable ability to pick a past return date as this is available at the moment only for simulation.
 
 ## License
 
